@@ -263,11 +263,41 @@ div.tombol a:nth-child(2):hover{
 	margin: auto;
 }
 
-#judul, #penerbit, #tahun{
+#judul, #penerbit, #tahun, button{
 	margin-bottom: 20px;
+	width: 100%;
+	padding: 10px 20px;
+	border-radius: 50px;
+	box-sizing: border-box;
 }
 
 .form{
 	display: flex;
 	flex-direction: column;
+}
+
+.form label.judul{
+
+}
+
+/*style tombol close*/
+
+div.close{
+	height: 30px;
+	width: 30px;
+	display: flex;
+}
+
+div.kiri, div.kanan{
+	width: 2px;
+	height: 35px;
+	background-color: red;
+}
+
+div.kiri{
+	transform: rotate(40deg);
+}
+
+div.kanan{
+	transform: rotate(-40deg);
 }
