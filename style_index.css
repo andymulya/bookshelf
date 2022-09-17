@@ -225,10 +225,16 @@ div.tombol a:nth-child(2):hover{
 
 @media(max-width: 377px){
 	header h1{
-		font-size: 30px;
+		font-size: 25px;
 	}
 
 	figure img{
 		right: 50px;
+	}
+}
+
+@media(max-width: 340px){
+	header h1{
+		font-size: 25px;
 	}
 }
