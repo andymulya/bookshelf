@@ -26,24 +26,24 @@ main{
 	margin: 0px 40px;
 }
 
-section{
+section:first-child{
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 }
 
-section, figure{
+section:first-child, figure{
 	margin: 0px 40px;
 }
 
-section h1{
+section:first-child h1{
 	font-size: 4em;
 	color: rgb(230, 179, 37);
 	font-family: 'Kanit', sans-serif;
 }
 
-section p{
+section:first-child p{
 	padding-bottom: 20px;
 	border-bottom: 1px solid rgb(165, 201, 202);
 	font-size: 20px;
@@ -75,7 +75,7 @@ div.tombol a:first-child{
 div.tombol a:first-child:hover{
 	background-color: rgb(57, 91, 100);
 	color: rgb(231, 246, 242);
-	transform: translateY(-7px);
+	transform: translateY(-5px);
 }
 
 div.tombol a:nth-child(2){
@@ -83,7 +83,7 @@ div.tombol a:nth-child(2){
 }
 
 div.tombol a:nth-child(2):hover{
-	transform: translateY(-7px);
+	transform: translateY(-5px);
 }
 
 @media(max-width: 950px){
@@ -94,11 +94,11 @@ div.tombol a:nth-child(2):hover{
 		width: 170px;
 		height: 170px;
 	}
-	section h1, section p, section div.tombol{
+	section:first-child h1, section:first-child p, section:first-child div.tombol{
 		margin: 20px 0px;
 	}
 
-	section{
+	section:first-child{
 		margin-left: 15%;
 	}
 }
@@ -107,13 +107,13 @@ div.tombol a:nth-child(2):hover{
 	figure img{
 		right: 120px;
 	}
-	section{
+	section:first-child{
 		margin-left: 10%;
 	}
 }
 
 @media(max-width:  890px){
-	section{
+	section:first-child{
 		margin-left: 5%;
 	}	
 }
@@ -127,11 +127,11 @@ div.tombol a:nth-child(2):hover{
 		width: 150px;
 		height: 150px;
 	}
-	section h1{
+	section:first-child h1{
 		font-size: 3em;
 	}
 
-	section{
+	section:first-child{
 		margin-left: 20%;
 	}
 }
@@ -141,16 +141,16 @@ div.tombol a:nth-child(2):hover{
 		right: 40px;
 	}
 
-	section p{
+	section:first-child p{
 		margin: 35px 0px;
 	}
 }
 
 @media(max-width: 650px){
-	section h1{
+	section:first-child h1{
 		width:60%;
 	}
-	section{
+	section:first-child{
 		margin-left: 25%;
 	}
 
@@ -167,11 +167,11 @@ div.tombol a:nth-child(2):hover{
 }
 
 @media(max-width: 530px){
-	section{
+	section:first-child{
 		margin-left: 25%;
 	}
 
-	section h1{
+	section:first-child h1{
 		font-size: 2.5em;
 
 	}
@@ -183,11 +183,11 @@ div.tombol a:nth-child(2):hover{
 }
 
 @media(max-width: 510px){
-	section h1{
+	section:first-child h1{
 		font-size: 1.7em;
 	}
 
-	section p{
+	section:first-child p{
 		font-size: 18px;
 	}
 
@@ -218,7 +218,7 @@ div.tombol a:nth-child(2):hover{
 		right: 60px;
 	}
 
-	section{
+	section:first-child{
 		margin-left: 40%;
 	}
 }
@@ -237,4 +237,37 @@ div.tombol a:nth-child(2):hover{
 	header h1{
 		font-size: 25px;
 	}
+}
+
+/*style form*/
+.sectionForm{
+	position: absolute;
+	z-index: 999;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding-top: 10%;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	height: 80%;
+	background-color: rgb(44, 51, 51);
+	justify-content: space-evenly;
+	padding: 0px 30px;
+	border-radius: 20px;
+	margin: auto;
+}
+
+#judul, #penerbit, #tahun{
+	margin-bottom: 20px;
+}
+
+.form{
+	display: flex;
+	flex-direction: column;
 }
