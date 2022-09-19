@@ -50,7 +50,7 @@ section:first-child p{
 	font-family: 'EB Garamond', serif;
 }
 
-section a:first-child{
+div.tambahDaftarBuku{
 	margin-right: 100px;
 }
 
@@ -59,7 +59,7 @@ div.tombol{
 	justify-content: left;
 }
 
-div.tombol a{
+div.tambahDaftarBuku, div.lihatDaftarBuku{
 	color: white;
 	padding: 15px 20px;
 	text-decoration: none;
@@ -68,21 +68,21 @@ div.tombol a{
 	white-space: nowrap;
 }
 
-div.tombol a:first-child{
+div.tambahDaftarBuku{
 	background-color: rgb(70, 130, 51);
 }
 
-div.tombol a:first-child:hover{
+div.tambahDaftarBuku:hover{
 	background-color: rgb(57, 91, 100);
 	color: rgb(231, 246, 242);
 	transform: translateY(-5px);
 }
 
-div.tombol a:nth-child(2){
+div.lihatDaftarBuku{
 	border: 1px solid white;
 }
 
-div.tombol a:nth-child(2):hover{
+div.lihatDaftarBuku:hover{
 	transform: translateY(-5px);
 }
 
@@ -204,7 +204,7 @@ div.tombol a:nth-child(2):hover{
 
 	}
 
-	div.tombol a{
+	div.tambahDaftarBuku, div.lihatDaftarBuku{
 		text-align: center;
 		margin-bottom: 20px;
 		width: 40%;
@@ -263,7 +263,7 @@ div.tombol a:nth-child(2):hover{
 	margin: auto;
 }
 
-#judul, #penerbit, #tahun, button{
+#judul, #penulis, #tahun{
 	margin-bottom: 20px;
 	width: 100%;
 	padding: 10px 20px;
@@ -276,10 +276,6 @@ div.tombol a:nth-child(2):hover{
 	flex-direction: column;
 }
 
-.form label.judul{
-
-}
-
 /*style tombol close*/
 
 div.close{
@@ -290,7 +286,7 @@ div.close{
 
 div.kiri, div.kanan{
 	width: 2px;
-	height: 35px;
+	height: 30px;
 	background-color: red;
 }
 
@@ -300,4 +296,29 @@ div.kiri{
 
 div.kanan{
 	transform: rotate(-40deg);
+}
+
+/*Style tombol tambah*/
+.tambah{
+	width: 80%;
+	height: 35px;
+	background-color: rgb(210, 0, 26);;
+	text-align: center;
+	padding-top: 15px;
+	font-weight: bold;
+	margin: auto;
+	border-radius: 30px;
+}
+
+.tambah:hover{
+	background-color: rgb(180, 0, 26);
+}
+
+.checkbox{
+	margin-bottom: 15px;
+	height: 20px;
+}
+
+.checkbox #selesai_dibaca{
+	transform: translateY(2px);
 }
