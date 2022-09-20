@@ -239,8 +239,7 @@ div.lihatDaftarBuku:hover{
 	}
 }
 
-/*style form*/
-.sectionForm{
+.sectionForm, .sectionDaftarBuku{
 	position: absolute;
 	z-index: 999;
 	top: 0px;
@@ -251,7 +250,8 @@ div.lihatDaftarBuku:hover{
 	padding-top: 10%;
 }
 
-.container{
+/*style form*/
+.containerForm{
 	display: flex;
 	flex-direction: column;
 	width: 20%;
@@ -276,25 +276,52 @@ div.lihatDaftarBuku:hover{
 	flex-direction: column;
 }
 
-/*style tombol close*/
+/*style tombol close form*/
 
-div.close{
+div.closeForm{
 	height: 30px;
 	width: 30px;
 	display: flex;
 }
 
-div.kiri, div.kanan{
+.sectionForm .containerForm .closeForm div.kiri, .sectionForm .containerForm .closeForm div.kanan{
 	width: 2px;
 	height: 30px;
 	background-color: red;
 }
 
-div.kiri{
+.sectionForm .containerForm .closeForm div.kiri{
 	transform: rotate(40deg);
 }
 
-div.kanan{
+.sectionForm .containerForm .closeForm div.kanan{
+	transform: rotate(-40deg);
+}
+
+/*style tombol close*/
+
+div.closeDaftarBuku{
+	height: 30px;
+	width: 30px;
+	display: flex;
+}
+
+.containerDaftarBuku{
+	display: flex;
+
+}
+
+.sectionDaftarBuku .containerDaftarBuku .closeDaftarBuku div.kiri, .sectionDaftarBuku .containerDaftarBuku .closeDaftarBuku div.kanan{
+	width: 2px;
+	height: 30px;
+	background-color: red;
+}
+
+.sectionDaftarBuku .containerDaftarBuku .closeDaftarBuku div.kiri{
+	transform: rotate(40deg);
+}
+
+.sectionDaftarBuku .containerDaftarBuku .closeDaftarBuku div.kanan{
 	transform: rotate(-40deg);
 }
 
@@ -321,4 +348,56 @@ div.kanan{
 
 .checkbox #selesai_dibaca{
 	transform: translateY(2px);
+}
+
+/*Style Lihat daftar Buku*/
+.containerDaftarBuku{
+	display: flex;
+	flex-direction: row;
+	padding-top: 20px;
+	height: 70%;
+	background-color: rgb(44, 51, 51);
+	justify-content: space-evenly;
+	border-radius: 20px;
+	margin: auto;
+}
+
+
+section.daftarBuku{
+	margin-top: 50px;
+}
+
+div.belumSelesaiDibaca, div.selesaiDibaca{
+	background-color: white;
+	color: black;
+	width: 100%;
+	margin-top: 30px;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+/*Style Action*/
+.action{
+	display: flex;
+	justify-content: space-evenly;
+	margin: 10px 20px;
+	width: 100%;
+	font-size: 11px;
+}
+
+.tombolSelesaiDibaca, .tombolBelumSelesaiDibaca, .hapusBuku{
+	margin-top: 10px;
+	width: 100px;
+	border-radius: 20px;
+	height: 20px;
+	text-align: center;
+	padding-top: 6px;
+}
+
+.tombolSelesaiDibaca, .tombolBelumSelesaiDibaca{
+	background-color: green;
+}
+
+.hapusBuku{
+	background-color: red;
 }
