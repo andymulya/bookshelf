@@ -60,6 +60,7 @@ div.tombol{
 }
 
 div.tambahDaftarBuku, div.lihatDaftarBuku{
+	cursor: pointer;
 	color: white;
 	padding: 15px 20px;
 	text-decoration: none;
@@ -282,6 +283,7 @@ div.closeForm{
 	height: 30px;
 	width: 30px;
 	display: flex;
+	cursor: pointer;
 }
 
 .sectionForm .containerForm .closeForm div.kiri, .sectionForm .containerForm .closeForm div.kanan{
@@ -304,6 +306,7 @@ div.closeDaftarBuku{
 	height: 30px;
 	width: 30px;
 	display: flex;
+	cursor: pointer;
 }
 
 .containerDaftarBuku{
@@ -335,6 +338,7 @@ div.closeDaftarBuku{
 	font-weight: bold;
 	margin: auto;
 	border-radius: 30px;
+	cursor: pointer;
 }
 
 .tambah:hover{
@@ -363,11 +367,16 @@ div.closeDaftarBuku{
 }
 
 
-section.daftarBuku{
+section.daftarBukuSelesaiDibaca, section.daftarBukuBelumSelesaiDibaca{
 	width: 50%;
 	margin: 10px 0px;
 	margin-left: 40px;
 	overflow-y: auto;
+	text-align: center;
+}
+
+section.daftarBukuSelesaiDibaca h2, section.daftarBukuBelumSelesaiDibaca h2{
+	transform: translateX(-30px);
 }
 
 div.belumSelesaiDibaca, div.selesaiDibaca{
@@ -385,6 +394,7 @@ div.belumSelesaiDibaca, div.selesaiDibaca{
 	justify-content: space-evenly;
 	width: 100%;
 	font-size: 11px;
+	color: white;
 }
 
 .tombolSelesaiDibaca, .tombolBelumSelesaiDibaca, .hapusBuku{
@@ -394,6 +404,7 @@ div.belumSelesaiDibaca, div.selesaiDibaca{
 	height: 20px;
 	text-align: center;
 	padding-top: 6px;
+	cursor: pointer;
 }
 
 .tombolSelesaiDibaca, .tombolBelumSelesaiDibaca{

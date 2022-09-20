@@ -27,10 +27,14 @@ getTombolCloseForm.addEventListener('click', function(){
 
 //Tombol Lihat daftar buku
 getTombolLihatDaftarBuku.addEventListener('click', function(){
-	getSectionDaftarBuku.removeAttribute('hidden');
-	dataBukuArray = JSON.parse(localStorage.getItem(storageKey));
 
-	console.log(dataBukuArray);
+	getSectionDaftarBuku.removeAttribute('hidden');
+
+	// if(dataBukuArray.length != 0){
+	// 	for(let data of dataBukuArray){
+			
+	// 	}
+	// }
 });
 
 //Tombol close di lihat daftar buku
@@ -57,27 +61,108 @@ getTombolTambah.addEventListener('click', function(){
 			localStorage.setItem(storageKey, result);
 
 			alert('Data buku berhasil ditambahkan');
-
-			getValueJudul.value = '';
-			getValuePenulis.value = '';
-			getValueTahun.value = '';
-			getValueCheckBox.checked = false;
+			location.reload(true);
 		}
 });
 
-window.addEventListener('load', function(){
+window.addEventListener('DOMContentLoaded', function(){
 	if(checkStorage()){
 		
 		if(localStorage.key(storageKey)){
+			const daftarBukuSelesaiDibaca = document.querySelector('.daftarBukuSelesaiDibaca'),
+			daftarBukuBelumSelesaiDibaca = document.querySelector('.daftarBukuBelumSelesaiDibaca');
+
 			const getDataLocal = JSON.parse(localStorage.getItem(storageKey));
 			for(data of getDataLocal){
 		 		dataBukuArray.push(data);
-		 		console.log(dataBukuArray);
+
+				if(data.isComplate == true){
+					//membuat card untuk daftar buku
+					let createElementDiv = document.createElement('div'),
+					createElementContainerBuku = document.createElement('div'),
+					createElementJudul = document.createElement('h3'),
+					createElementPenulis = document.createElement('p'),
+					createElementTahun = document.createElement('p'),
+					createElementAction = document.createElement('div'),
+					createElementTombol = document.createElement('div'),
+					createElementHapus = document.createElement('div');
+
+					//Memmbuat Attribute untuk setiap Element
+					createElementDiv.setAttribute('class', 'selesaiDibaca');
+					createElementContainerBuku.setAttribute('class', 'containerBuku');
+					createElementAction.setAttribute('class', 'action');
+					createElementTombol.setAttribute('class', 'tombolBelumSelesaiDibaca');
+					createElementHapus.setAttribute('class', 'hapusBuku');
+
+					//Memasukkan element
+					createElementDiv.appendChild(createElementContainerBuku);
+					createElementDiv.appendChild(createElementAction);
+					createElementContainerBuku.appendChild(createElementJudul);
+					createElementContainerBuku.appendChild(createElementPenulis);
+					createElementContainerBuku.appendChild(createElementTahun);
+					createElementAction.appendChild(createElementTombol);
+					createElementAction.appendChild(createElementHapus);
+
+					const createTextJudul = document.createTextNode(`${data.judul}`),
+					createTextPenulis = document.createTextNode(`Penulis: ${data.penulis}`),
+					createTextTahun = document.createTextNode(`Tahun: ${data.tahun}`),
+					createTextTombolBelumSelesaiDibaca = document.createTextNode('Belum selesai dibaca');
+					createTextHapus = document.createTextNode('Hapus');
+
+					createElementJudul.appendChild(createTextJudul);
+					createElementPenulis.appendChild(createTextPenulis);
+					createElementTahun.appendChild(createTextTahun);
+					createElementTombol.appendChild(createTextTombolBelumSelesaiDibaca);
+					createElementHapus.appendChild(createTextHapus);
+
+					daftarBukuSelesaiDibaca.appendChild(createElementDiv);
+
+					
+				}else{
+					//membuat card untuk daftar buku
+					let createElementDiv = document.createElement('div'),
+					createElementContainerBuku = document.createElement('div'),
+					createElementJudul = document.createElement('h3'),
+					createElementPenulis = document.createElement('p'),
+					createElementTahun = document.createElement('p'),
+					createElementAction = document.createElement('div'),
+					createElementTombol = document.createElement('div'),
+					createElementHapus = document.createElement('div');
+
+					//Memmbuat Attribute untuk setiap Element
+					createElementDiv.setAttribute('class', 'selesaiDibaca');
+					createElementContainerBuku.setAttribute('class', 'containerBuku');
+					createElementAction.setAttribute('class', 'action');
+					createElementTombol.setAttribute('class', 'tombolSelesaiDibaca');
+					createElementHapus.setAttribute('class', 'hapusBuku');
+
+					//Memasukkan element
+					createElementDiv.appendChild(createElementContainerBuku);
+					createElementDiv.appendChild(createElementAction);
+					createElementContainerBuku.appendChild(createElementJudul);
+					createElementContainerBuku.appendChild(createElementPenulis);
+					createElementContainerBuku.appendChild(createElementTahun);
+					createElementAction.appendChild(createElementTombol);
+					createElementAction.appendChild(createElementHapus);
+					
+					const createTextJudul = document.createTextNode(`${data.judul}`),
+					createTextPenulis = document.createTextNode(`Penulis: ${data.penulis}`),
+					createTextTahun = document.createTextNode(`Tahun: ${data.tahun}`),
+					createTextTombolSelesaiDibaca = document.createTextNode('Selesai dibaca');
+					createTextHapus = document.createTextNode('Hapus');
+
+					createElementJudul.appendChild(createTextJudul);
+					createElementPenulis.appendChild(createTextPenulis);
+					createElementTahun.appendChild(createTextTahun);
+					createElementTombol.appendChild(createTextTombolSelesaiDibaca);
+					createElementHapus.appendChild(createTextHapus);
+
+					daftarBukuBelumSelesaiDibaca.appendChild(createElementDiv);
+				}
 		 	}
 		}
 	}else{
 		alert('Maaf web browser anda tidak mendukung');
 	}
 });
-
 
