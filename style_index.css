@@ -354,7 +354,7 @@ div.closeDaftarBuku{
 .containerDaftarBuku{
 	display: flex;
 	flex-direction: row;
-	padding-top: 20px;
+	padding: 40px;
 	height: 70%;
 	background-color: rgb(44, 51, 51);
 	justify-content: space-evenly;
@@ -364,13 +364,16 @@ div.closeDaftarBuku{
 
 
 section.daftarBuku{
-	margin-top: 50px;
+	width: 50%;
+	margin: 10px 0px;
+	margin-left: 40px;
+	overflow-y: auto;
 }
 
 div.belumSelesaiDibaca, div.selesaiDibaca{
 	background-color: white;
 	color: black;
-	width: 100%;
+	width: 70%;
 	margin-top: 30px;
 	padding: 20px;
 	border-radius: 10px;
@@ -380,7 +383,6 @@ div.belumSelesaiDibaca, div.selesaiDibaca{
 .action{
 	display: flex;
 	justify-content: space-evenly;
-	margin: 10px 20px;
 	width: 100%;
 	font-size: 11px;
 }
