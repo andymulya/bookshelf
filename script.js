@@ -10,69 +10,16 @@ getValueTahun = document.getElementById('tahun'),
 getTombolTambah = document.querySelector('.tambah'),
 getValueCheckBox = document.querySelector('#selesai_dibaca'),
 storageKey = 'DATA_BUKU',
-dataBukuArray = [];
+dataBukuArray = [],
+getDataLocal = JSON.parse(localStorage.getItem(storageKey));
 
-//Cek dukungan localStorage pada web
-const checkStorage = () => typeof(Storage) !== 'undifined';
-
-//Tombol Tambah daftar buku
-getTombolTambahDaftarBuku.addEventListener('click', function(){
-	getSectionForm.removeAttribute('hidden');
-});
-
-//Tombol close di form
-getTombolCloseForm.addEventListener('click', function(){
-	getSectionForm.setAttribute('hidden','');
-});
-
-//Tombol Lihat daftar buku
-getTombolLihatDaftarBuku.addEventListener('click', function(){
-
-	getSectionDaftarBuku.removeAttribute('hidden');
-
-	// if(dataBukuArray.length != 0){
-	// 	for(let data of dataBukuArray){
-			
-	// 	}
-	// }
-});
-
-//Tombol close di lihat daftar buku
-getTombolCloseDaftarBuku.addEventListener('click', function(){
-	getSectionDaftarBuku.setAttribute('hidden','');
-});
-
-//Tombol tambah data buku
-getTombolTambah.addEventListener('click', function(){
-	const getData = {
-			id: +new Date,
-			judul: getValueJudul.value,
-			penulis: getValuePenulis.value,
-			tahun: getValueTahun.value,
-			isComplate: getValueCheckBox.checked
-		}
-		if(getValueJudul.value == '' && getValuePenulis.value == '' && getValueTahun.value == ''){
-			alert('Maaf, mohon diisi dengan benar');
-		}else{
-			dataBukuArray.push(getData);
-			
-
-			const result = JSON.stringify(dataBukuArray);
-			localStorage.setItem(storageKey, result);
-
-			alert('Data buku berhasil ditambahkan');
-			location.reload(true);
-		}
-});
-
-window.addEventListener('DOMContentLoaded', function(){
+//Ketika load window
+window.addEventListener('load', function(){
 	if(checkStorage()){
 		
 		if(localStorage.key(storageKey)){
 			const daftarBukuSelesaiDibaca = document.querySelector('.daftarBukuSelesaiDibaca'),
 			daftarBukuBelumSelesaiDibaca = document.querySelector('.daftarBukuBelumSelesaiDibaca');
-
-			const getDataLocal = JSON.parse(localStorage.getItem(storageKey));
 			for(data of getDataLocal){
 		 		dataBukuArray.push(data);
 
@@ -91,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function(){
 					createElementDiv.setAttribute('class', 'selesaiDibaca');
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
-					createElementTombol.setAttribute('class', 'tombolBelumSelesaiDibaca');
+					createElementTombol.setAttribute('class', 'tombolAction');
 					createElementHapus.setAttribute('class', 'hapusBuku');
 
 					//Memasukkan element
@@ -133,7 +80,7 @@ window.addEventListener('DOMContentLoaded', function(){
 					createElementDiv.setAttribute('class', 'selesaiDibaca');
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
-					createElementTombol.setAttribute('class', 'tombolSelesaiDibaca');
+					createElementTombol.setAttribute('class', 'tombolAction');
 					createElementHapus.setAttribute('class', 'hapusBuku');
 
 					//Memasukkan element
@@ -158,6 +105,7 @@ window.addEventListener('DOMContentLoaded', function(){
 					createElementHapus.appendChild(createTextHapus);
 
 					daftarBukuBelumSelesaiDibaca.appendChild(createElementDiv);
+
 				}
 		 	}
 		}
@@ -165,4 +113,72 @@ window.addEventListener('DOMContentLoaded', function(){
 		alert('Maaf web browser anda tidak mendukung');
 	}
 });
+
+//Cek dukungan localStorage pada web
+const checkStorage = () => typeof(Storage) !== 'undifined';
+
+//Tombol Tambah daftar buku
+getTombolTambahDaftarBuku.addEventListener('click', function(){
+	getSectionForm.removeAttribute('hidden');
+});
+
+//Tombol close di form
+getTombolCloseForm.addEventListener('click', function(){
+	getSectionForm.setAttribute('hidden','');
+});
+
+//Tombol Lihat daftar buku
+getTombolLihatDaftarBuku.addEventListener('click', function(){
+	getSectionDaftarBuku.removeAttribute('hidden');
+
+	const getTombolAction1 = document.getElementsByClassName('hapusBuku');
+	const getTombolAction2 = document.getElementsByClassName('tombolAction');
+
+	for(let i = 0; i < getTombolAction1.length; i++){
+
+		//Tombol hapus data
+		getTombolAction1[i].addEventListener('click', function(){
+			
+			getDataLocal.splice(i, i+1);
+			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
+			location.reload(true);
+		});
+
+		getTombolAction2[i].addEventListener('click', function(){
+			getDataLocal[i].isComplate = !getDataLocal[i].isComplate;
+			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
+			location.reload(true);
+		});
+	}
+
+});
+
+//Tombol close di lihat daftar buku
+getTombolCloseDaftarBuku.addEventListener('click', function(){
+	getSectionDaftarBuku.setAttribute('hidden','');
+});
+
+//Tombol tambah data buku
+getTombolTambah.addEventListener('click', function(){
+	const getData = {
+			id: +new Date,
+			judul: getValueJudul.value,
+			penulis: getValuePenulis.value,
+			tahun: getValueTahun.value,
+			isComplate: getValueCheckBox.checked
+		}
+		if(getValueJudul.value == '' && getValuePenulis.value == '' && getValueTahun.value == ''){
+			alert('Maaf, mohon diisi dengan benar');
+		}else{
+			dataBukuArray.push(getData);
+			
+
+			const result = JSON.stringify(dataBukuArray);
+			localStorage.setItem(storageKey, result);
+
+			alert('Data buku berhasil ditambahkan');
+			location.reload(true);
+		}
+});
+
 

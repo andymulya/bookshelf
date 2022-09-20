@@ -370,7 +370,7 @@ div.closeDaftarBuku{
 section.daftarBukuSelesaiDibaca, section.daftarBukuBelumSelesaiDibaca{
 	width: 50%;
 	margin: 10px 0px;
-	margin-left: 40px;
+	margin-left: 70px;
 	overflow-y: auto;
 	text-align: center;
 }
@@ -394,20 +394,21 @@ div.belumSelesaiDibaca, div.selesaiDibaca{
 	justify-content: space-evenly;
 	width: 100%;
 	font-size: 11px;
+	font-weight: bold;
 	color: white;
 }
 
-.tombolSelesaiDibaca, .tombolBelumSelesaiDibaca, .hapusBuku{
+.tombolAction, .hapusBuku{
 	margin-top: 10px;
 	width: 100px;
 	border-radius: 20px;
-	height: 20px;
+	height: 25px;
 	text-align: center;
-	padding-top: 6px;
+	padding-top: 10px;
 	cursor: pointer;
 }
 
-.tombolSelesaiDibaca, .tombolBelumSelesaiDibaca{
+.tombolAction{
 	background-color: green;
 }
 
