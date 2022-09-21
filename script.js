@@ -12,6 +12,7 @@ getValueCheckBox = document.querySelector('#selesai_dibaca'),
 storageKey = 'DATA_BUKU',
 dataBukuArray = [],
 getDataLocal = JSON.parse(localStorage.getItem(storageKey));
+let index = 0;
 
 //Ketika load window
 window.addEventListener('load', function(){
@@ -36,6 +37,7 @@ window.addEventListener('load', function(){
 
 					//Memmbuat Attribute untuk setiap Element
 					createElementDiv.setAttribute('class', 'selesaiDibaca');
+					createElementDiv.classList.add(`${index++}`);
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
 					createElementTombol.setAttribute('class', 'tombolAction');
@@ -77,7 +79,8 @@ window.addEventListener('load', function(){
 					createElementHapus = document.createElement('div');
 
 					//Memmbuat Attribute untuk setiap Element
-					createElementDiv.setAttribute('class', 'selesaiDibaca');
+					createElementDiv.setAttribute('class', 'belumSelesaiDibaca');
+					createElementDiv.classList.add(`${index++}`);
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
 					createElementTombol.setAttribute('class', 'tombolAction');
@@ -140,8 +143,10 @@ getTombolLihatDaftarBuku.addEventListener('click', function(){
 		getTombolAction1[i].addEventListener('click', function(){
 			
 			getDataLocal.splice(i, i+1);
+			const target = document.getElementsByClassName(`${i}`)[0];
+			dataBukuArray.splice(i, i+1);
 			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
-			location.reload(true);
+			target.remove();
 		});
 
 		getTombolAction2[i].addEventListener('click', function(){
@@ -180,5 +185,3 @@ getTombolTambah.addEventListener('click', function(){
 			location.reload(true);
 		}
 });
-
-
