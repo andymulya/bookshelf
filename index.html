@@ -14,19 +14,12 @@
 	<body>
 		<header>
 			<h1>Bookshelf Apps</h1>
-			<form>
-				<input type="search">
-				<div class="search"></div>
-			</form>
 		</header>
 		<main>
 			<section>
 				<h1>Daftar Buku Anda</h1>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
+					Daftarkan buku anda, agar anda dapat mengetahui buku yang anda miliki, dan dapat mengetahui buku yang selesai anda baca dan yang belum selesai anda baca.
 				</p>
 
 				<div class="tombol">
@@ -74,12 +67,24 @@
 						<div class='kiri'></div>
 						<div class='kanan'></div>
 					</div>
-					<section class="daftarBukuSelesaiDibaca parentCard">
+					<section class="daftarBukuSelesaiDibaca">
 						<h2>Selesai Dibaca</h2>
 					</section>
 
-					<section class="daftarBukuBelumSelesaiDibaca parentCard">
+					<section class="daftarBukuBelumSelesaiDibaca">
 						<h2>Belum Selesai Dibaca</h2>
+					</section>
+
+					<!-- custom dialog -->
+					<section class="customDialog" hidden>
+						<div class="containerCustomDialog">
+							<h4>Apakah anda yakin ingin menghapusdaftar buku ini?</h3>
+
+							<div class="actionCustomDialog">
+								<div class="yes">Yes</div>
+								<div class="no">No</div>
+							</div>
+						</div>
 					</section>
 				</div>
 			</section>

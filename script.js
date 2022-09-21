@@ -9,10 +9,12 @@ getValuePenulis = document.getElementById('penulis'),
 getValueTahun = document.getElementById('tahun'),
 getTombolTambah = document.querySelector('.tambah'),
 getValueCheckBox = document.querySelector('#selesai_dibaca'),
+getSectionCustomDialog = document.querySelector('.customDialog');
+getActionCustomDialogYes = document.querySelector('.yes');
+getActionCustomDialogNo = document.querySelector('.no');
 storageKey = 'DATA_BUKU',
 dataBukuArray = [],
 getDataLocal = JSON.parse(localStorage.getItem(storageKey));
-let index = 0;
 
 //Ketika load window
 window.addEventListener('load', function(){
@@ -37,7 +39,6 @@ window.addEventListener('load', function(){
 
 					//Memmbuat Attribute untuk setiap Element
 					createElementDiv.setAttribute('class', 'selesaiDibaca');
-					createElementDiv.classList.add(`${index++}`);
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
 					createElementTombol.setAttribute('class', 'tombolAction');
@@ -80,7 +81,6 @@ window.addEventListener('load', function(){
 
 					//Memmbuat Attribute untuk setiap Element
 					createElementDiv.setAttribute('class', 'belumSelesaiDibaca');
-					createElementDiv.classList.add(`${index++}`);
 					createElementContainerBuku.setAttribute('class', 'containerBuku');
 					createElementAction.setAttribute('class', 'action');
 					createElementTombol.setAttribute('class', 'tombolAction');
@@ -141,12 +141,22 @@ getTombolLihatDaftarBuku.addEventListener('click', function(){
 
 		//Tombol hapus data
 		getTombolAction1[i].addEventListener('click', function(){
+			getSectionCustomDialog.removeAttribute('hidden');
+
+			//Tombol Yes
+			getActionCustomDialogYes.addEventListener('click', function(){
+				getDataLocal.splice(i, i+1);
+				dataBukuArray.splice(i, i+1);
+				localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
+				location.reload(true);
+				alert('Berhasil dihapus');
+			});
+
+			//Tombol No
+			getActionCustomDialogNo.addEventListener('click', function(){
+				getSectionCustomDialog.setAttribute('hidden', '');
+			});
 			
-			getDataLocal.splice(i, i+1);
-			const target = document.getElementsByClassName(`${i}`)[0];
-			dataBukuArray.splice(i, i+1);
-			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
-			target.remove();
 		});
 
 		getTombolAction2[i].addEventListener('click', function(){
