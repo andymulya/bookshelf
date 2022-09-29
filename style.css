@@ -379,7 +379,7 @@ section.daftarBukuSelesaiDibaca h2, section.daftarBukuBelumSelesaiDibaca h2{
 	transform: translateX(-30px);
 }
 
-div.belumSelesaiDibaca, div.selesaiDibaca{
+div.containerTodo{
 	background-color: white;
 	color: black;
 	width: 70%;

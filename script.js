@@ -162,7 +162,8 @@ getTombolLihatDaftarBuku.addEventListener('click', function(){
 		getTombolAction2[i].addEventListener('click', function(){
 			getDataLocal[i].isComplate = !getDataLocal[i].isComplate;
 			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
-			location.reload(true);
+			// location.reload(true);
+			console.log(getDataLocal[i]);
 		});
 	}
 
