@@ -1,198 +1,197 @@
-const getSectionForm = document.querySelector('.sectionForm'),
-getSectionDaftarBuku = document.querySelector('.sectionDaftarBuku');
-getTombolTambahDaftarBuku = document.querySelector('.tombol .tambahDaftarBuku'),
-getTombolCloseForm = document.querySelector('.closeForm'),
-getTombolLihatDaftarBuku = document.querySelector('.lihatDaftarBuku'),
-getTombolCloseDaftarBuku = document.querySelector('.closeDaftarBuku');
-getValueJudul = document.getElementById('judul'),
-getValuePenulis = document.getElementById('penulis'),
-getValueTahun = document.getElementById('tahun'),
-getTombolTambah = document.querySelector('.tambah'),
-getValueCheckBox = document.querySelector('#selesai_dibaca'),
-getSectionCustomDialog = document.querySelector('.customDialog');
-getActionCustomDialogYes = document.querySelector('.yes');
-getActionCustomDialogNo = document.querySelector('.no');
+const todos = [],
 storageKey = 'DATA_BUKU',
-dataBukuArray = [],
-getDataLocal = JSON.parse(localStorage.getItem(storageKey));
+getData = JSON.parse(localStorage.getItem(storageKey)),
+generateId = () => +new Date();
 
-//Ketika load window
+//Ketika jendela refres
 window.addEventListener('load', function(){
-	if(checkStorage()){
-		
-		if(localStorage.key(storageKey)){
-			const daftarBukuSelesaiDibaca = document.querySelector('.daftarBukuSelesaiDibaca'),
-			daftarBukuBelumSelesaiDibaca = document.querySelector('.daftarBukuBelumSelesaiDibaca');
-			for(data of getDataLocal){
-		 		dataBukuArray.push(data);
+	const getSectionDaftarBukuSelesaiDibaca = document.querySelector('.daftarBukuSelesaiDibaca'),
+	getSectionDaftarBukuBelumSelesaiDibaca = document.querySelector('.daftarBukuBelumSelesaiDibaca');
 
-				if(data.isComplate == true){
-					//membuat card untuk daftar buku
-					let createElementDiv = document.createElement('div'),
-					createElementContainerBuku = document.createElement('div'),
-					createElementJudul = document.createElement('h3'),
-					createElementPenulis = document.createElement('p'),
-					createElementTahun = document.createElement('p'),
-					createElementAction = document.createElement('div'),
-					createElementTombol = document.createElement('div'),
-					createElementHapus = document.createElement('div');
+	if(localStorage.key(storageKey)){
+		for(data of getData){
+			todos.push(data);
+			const element = makeTodoList(data);
 
-					//Memmbuat Attribute untuk setiap Element
-					createElementDiv.setAttribute('class', 'selesaiDibaca');
-					createElementContainerBuku.setAttribute('class', 'containerBuku');
-					createElementAction.setAttribute('class', 'action');
-					createElementTombol.setAttribute('class', 'tombolAction');
-					createElementHapus.setAttribute('class', 'hapusBuku');
-
-					//Memasukkan element
-					createElementDiv.appendChild(createElementContainerBuku);
-					createElementDiv.appendChild(createElementAction);
-					createElementContainerBuku.appendChild(createElementJudul);
-					createElementContainerBuku.appendChild(createElementPenulis);
-					createElementContainerBuku.appendChild(createElementTahun);
-					createElementAction.appendChild(createElementTombol);
-					createElementAction.appendChild(createElementHapus);
-
-					const createTextJudul = document.createTextNode(`${data.judul}`),
-					createTextPenulis = document.createTextNode(`Penulis: ${data.penulis}`),
-					createTextTahun = document.createTextNode(`Tahun: ${data.tahun}`),
-					createTextTombolBelumSelesaiDibaca = document.createTextNode('Belum selesai dibaca');
-					createTextHapus = document.createTextNode('Hapus');
-
-					createElementJudul.appendChild(createTextJudul);
-					createElementPenulis.appendChild(createTextPenulis);
-					createElementTahun.appendChild(createTextTahun);
-					createElementTombol.appendChild(createTextTombolBelumSelesaiDibaca);
-					createElementHapus.appendChild(createTextHapus);
-
-					daftarBukuSelesaiDibaca.appendChild(createElementDiv);
-
-					
-				}else{
-					//membuat card untuk daftar buku
-					let createElementDiv = document.createElement('div'),
-					createElementContainerBuku = document.createElement('div'),
-					createElementJudul = document.createElement('h3'),
-					createElementPenulis = document.createElement('p'),
-					createElementTahun = document.createElement('p'),
-					createElementAction = document.createElement('div'),
-					createElementTombol = document.createElement('div'),
-					createElementHapus = document.createElement('div');
-
-					//Memmbuat Attribute untuk setiap Element
-					createElementDiv.setAttribute('class', 'belumSelesaiDibaca');
-					createElementContainerBuku.setAttribute('class', 'containerBuku');
-					createElementAction.setAttribute('class', 'action');
-					createElementTombol.setAttribute('class', 'tombolAction');
-					createElementHapus.setAttribute('class', 'hapusBuku');
-
-					//Memasukkan element
-					createElementDiv.appendChild(createElementContainerBuku);
-					createElementDiv.appendChild(createElementAction);
-					createElementContainerBuku.appendChild(createElementJudul);
-					createElementContainerBuku.appendChild(createElementPenulis);
-					createElementContainerBuku.appendChild(createElementTahun);
-					createElementAction.appendChild(createElementTombol);
-					createElementAction.appendChild(createElementHapus);
-					
-					const createTextJudul = document.createTextNode(`${data.judul}`),
-					createTextPenulis = document.createTextNode(`Penulis: ${data.penulis}`),
-					createTextTahun = document.createTextNode(`Tahun: ${data.tahun}`),
-					createTextTombolSelesaiDibaca = document.createTextNode('Selesai dibaca');
-					createTextHapus = document.createTextNode('Hapus');
-
-					createElementJudul.appendChild(createTextJudul);
-					createElementPenulis.appendChild(createTextPenulis);
-					createElementTahun.appendChild(createTextTahun);
-					createElementTombol.appendChild(createTextTombolSelesaiDibaca);
-					createElementHapus.appendChild(createTextHapus);
-
-					daftarBukuBelumSelesaiDibaca.appendChild(createElementDiv);
-
-				}
-		 	}
+			if(data.isComplate){
+				getSectionDaftarBukuSelesaiDibaca.append(element);
+			}else{
+				getSectionDaftarBukuBelumSelesaiDibaca.append(element);
+			}
 		}
-	}else{
-		alert('Maaf web browser anda tidak mendukung');
 	}
 });
 
-//Cek dukungan localStorage pada web
-const checkStorage = () => typeof(Storage) !== 'undifined';
+//todo Object
+function generateTodoObject(id, judul, penulis, tahun, isComplate){
+	return {
+		id,
+		judul,
+		penulis,
+		tahun,
+		isComplate
+	}
+}
 
-//Tombol Tambah daftar buku
-getTombolTambahDaftarBuku.addEventListener('click', function(){
-	getSectionForm.removeAttribute('hidden');
-});
+//Tambah Buku
+function tambahTodo(){
+	const getValueId = generateId(),
+	getValueJudul = document.getElementById('judul').value,
+	getValuePenulis = document.getElementById('penulis').value,
+	getValueTahun = document.getElementById('tahun').value,
+	getValueCheckBox = document.getElementById('selesai_dibaca').checked,
 
-//Tombol close di form
-getTombolCloseForm.addEventListener('click', function(){
-	getSectionForm.setAttribute('hidden','');
-});
+	todoObject = generateTodoObject(getValueId, getValueJudul, (getValuePenulis == '') ? '-' : getValuePenulis, (getValueTahun == '') ? '-' : getValueTahun, getValueCheckBox);
 
-//Tombol Lihat daftar buku
-getTombolLihatDaftarBuku.addEventListener('click', function(){
-	getSectionDaftarBuku.removeAttribute('hidden');
+	todos.push(todoObject);
+	localStorage.setItem(storageKey, JSON.stringify(todos));
+}
 
-	const getTombolAction1 = document.getElementsByClassName('hapusBuku');
-	const getTombolAction2 = document.getElementsByClassName('tombolAction');
+//Tombol tambah daftar buku
+function klikTombolTambahDaftarBuku(){
+	const getTombolDaftarBuku = document.querySelector('.tambahDaftarBuku');
 
-	for(let i = 0; i < getTombolAction1.length; i++){
+	const getSectionForm = document.querySelector('.sectionForm');
+	const getTombolTutupForm = document.querySelector('.closeForm');
 
-		//Tombol hapus data
-		getTombolAction1[i].addEventListener('click', function(){
-			getSectionCustomDialog.removeAttribute('hidden');
+	const getTombolTambahBuku = document.querySelector('.tambah');
 
-			//Tombol Yes
-			getActionCustomDialogYes.addEventListener('click', function(){
-				getDataLocal.splice(i, i+1);
-				dataBukuArray.splice(i, i+1);
-				localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
-				location.reload(true);
-				alert('Berhasil dihapus');
-			});
+	//Membuka form
+	getTombolDaftarBuku.addEventListener('click', function(){
+		getSectionForm.removeAttribute('hidden');
+	});
 
-			//Tombol No
-			getActionCustomDialogNo.addEventListener('click', function(){
-				getSectionCustomDialog.setAttribute('hidden', '');
-			});
-			
-		});
+	//Menutup Form
+	getTombolTutupForm.addEventListener('click', function(){
+		getSectionForm.setAttribute('hidden', '');
+	});
 
-		getTombolAction2[i].addEventListener('click', function(){
-			getDataLocal[i].isComplate = !getDataLocal[i].isComplate;
-			localStorage.setItem(storageKey, JSON.stringify(getDataLocal));
-			// location.reload(true);
-			console.log(getDataLocal[i]);
-		});
+	//Tombol Tambah Buku
+	getTombolTambahBuku.addEventListener('click', function(){
+		const getValueJudul = document.getElementById('judul');
+
+		(getValueJudul.value == '') ? alert('Mohon form judul harap diisi') : tambahTodo();
+		location.reload(true);
+	});
+}
+klikTombolTambahDaftarBuku();
+
+
+//Tombol lihat daftar buku
+function klikTombolLihatDaftarBuku(){
+	const getTombolLihatDaftarBuku = document.querySelector('.lihatDaftarBuku');
+	const getSectionLihatDaftarBuku = document.querySelector('.sectionDaftarBuku');
+	const getTombolTutupDaftarBuku = document.querySelector('.closeDaftarBuku');
+
+	//Membuka lihat daftar buku
+	getTombolLihatDaftarBuku.addEventListener('click', function(){
+		getSectionLihatDaftarBuku.removeAttribute('hidden');
+	});
+
+	//Menutup daftar buku
+	getTombolTutupDaftarBuku.addEventListener('click', function(){
+		getSectionLihatDaftarBuku.setAttribute('hidden', '');
+	});
+}
+klikTombolLihatDaftarBuku();
+
+//Container todo list
+function makeTodoList(todoObject){
+	let {id, judul, penulis, tahun, isComplate} = todoObject;
+
+	const textJudul = document.createElement('h3');
+	textJudul.innerHTML = judul;
+
+	const textPenulis = document.createElement('p');
+	textPenulis.innerHTML = penulis;
+
+	const textTahun = tahun;
+	textTahun.innerHTML = tahun;
+
+	const textContainer = document.createElement('div');
+	textContainer.setAttribute('class', 'containerBuku');
+	textContainer.append(textJudul, textPenulis, textTahun);
+
+	const containerTodo = document.createElement('div');
+	containerTodo.setAttribute('class', 'containerTodo');
+	containerTodo.append(textContainer);
+	containerTodo.setAttribute('id', `${id}`);
+
+	const tombolAction = document.createElement('div');
+	tombolAction.setAttribute('class', 'tombolAction');
+
+	const tombolHapus = document.createElement('div');
+	tombolHapus.innerHTML = 'Hapus';
+	tombolHapus.setAttribute('class', 'hapusBuku');
+
+	const containerAction = document.createElement('div');
+	containerAction.setAttribute('class', 'action');
+	containerAction.append(tombolAction, tombolHapus);
+
+	containerTodo.append(containerAction);
+
+	const getSectionCustomDialog = document.querySelector('.customDialog'),
+	getActionCustomDialogYes = document.querySelector('.yes'),
+	getActionCustomDialogNo = document.querySelector('.no');
+
+	//Temukan todo index
+	function findTodoIndex(todoIndex){
+		for(const i in todos){
+			if(todos[i].id === todoIndex) return i;
+		}
+		return -1;
 	}
 
-});
+	//Menghapus todo
+	function hapus(todoId){
+		const target = findTodoIndex(todoId);
+		if(target === -1) return;
 
-//Tombol close di lihat daftar buku
-getTombolCloseDaftarBuku.addEventListener('click', function(){
-	getSectionDaftarBuku.setAttribute('hidden','');
-});
+		todos.splice(target, 1);
+	}
+	
+	//Tombol hapus
+	tombolHapus.addEventListener('click', function(){
+		getSectionCustomDialog.removeAttribute('hidden');
 
-//Tombol tambah data buku
-getTombolTambah.addEventListener('click', function(){
-	const getData = {
-			id: +new Date,
-			judul: getValueJudul.value,
-			penulis: getValuePenulis.value,
-			tahun: getValueTahun.value,
-			isComplate: getValueCheckBox.checked
-		}
-		if(getValueJudul.value == '' && getValuePenulis.value == '' && getValueTahun.value == ''){
-			alert('Maaf, mohon diisi dengan benar');
-		}else{
-			dataBukuArray.push(getData);
-			
-
-			const result = JSON.stringify(dataBukuArray);
-			localStorage.setItem(storageKey, result);
-
-			alert('Data buku berhasil ditambahkan');
+		//Tombol yes
+		getActionCustomDialogYes.addEventListener('click', function(){
+			hapus(id);
+			localStorage.setItem(storageKey, JSON.stringify(todos));
 			location.reload(true);
-		}
-});
+		});
+
+		//Tombol no
+		getActionCustomDialogNo.addEventListener('click', function(){
+			getSectionCustomDialog.setAttribute('hidden', '');
+		});
+	});
+
+	if(isComplate){
+		tombolAction.innerHTML = 'Belum selesai dibaca';
+
+		tombolAction.addEventListener('click', function(){
+			for(const data of todos){
+				if(data.id == id){
+					data.isComplate = false;
+					localStorage.setItem(storageKey, JSON.stringify(todos));
+					location.reload(true);
+				}
+			}
+		});
+	}else{
+		tombolAction.innerHTML = 'Selesai dibaca';
+
+		tombolAction.addEventListener('click', function(){
+			for(const data of todos){
+				if(data.id == id){
+					data.isComplate = true;
+					localStorage.setItem(storageKey, JSON.stringify(todos));
+					location.reload(true);
+				}
+			}
+		});
+	}
+
+	return containerTodo;
+}
