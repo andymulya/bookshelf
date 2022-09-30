@@ -1,6 +1,7 @@
 const todos = [],
 storageKey = 'DATA_BUKU',
 getData = JSON.parse(localStorage.getItem(storageKey)),
+checkStorage = () => typeof(Storage) !== 'undifined',
 generateId = () => +new Date();
 
 //Ketika jendela refres
@@ -8,17 +9,22 @@ window.addEventListener('load', function(){
 	const getSectionDaftarBukuSelesaiDibaca = document.querySelector('.daftarBukuSelesaiDibaca'),
 	getSectionDaftarBukuBelumSelesaiDibaca = document.querySelector('.daftarBukuBelumSelesaiDibaca');
 
-	if(localStorage.key(storageKey)){
-		for(data of getData){
-			todos.push(data);
-			const element = makeTodoList(data);
+	if(checkStorage()){
 
-			if(data.isComplate){
-				getSectionDaftarBukuSelesaiDibaca.append(element);
-			}else{
-				getSectionDaftarBukuBelumSelesaiDibaca.append(element);
+		if(localStorage.key(storageKey)){
+			for(data of getData){
+				todos.push(data);
+				const element = makeTodoList(data);
+
+				if(data.isComplate){
+					getSectionDaftarBukuSelesaiDibaca.append(element);
+				}else{
+					getSectionDaftarBukuBelumSelesaiDibaca.append(element);
+				}
 			}
 		}
+	}else{
+		alert('Mohon Maaf Browser Anda Tidak Mendukung Penyimpanan Lokal');
 	}
 });
 
